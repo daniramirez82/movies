@@ -6,6 +6,7 @@ import SearchMovies from "./components/SearchMovies";
 function App() {
   const [showMenu, setShowMenu] = useState(false);
 
+
   function handleClick() {
     setShowMenu((prevState) => {
       return !prevState;
