@@ -1,16 +1,7 @@
-<<<<<<< HEAD
 .background-gradient {
     background: rgb(0,0,0);
     background: -moz-linear-gradient(135deg, rgba(0,0,0,1) 12%, rgba(163,144,232,0) 56%, rgba(179,158,255,0) 100%);
     background: -webkit-linear-gradient(135deg, rgba(0,0,0,1) 12%, rgba(163,144,232,0) 56%, rgba(179,158,255,0) 100%);
     background: linear-gradient(135deg, rgba(0,0,0,1) 12%, rgba(163,144,232,0) 56%, rgba(179,158,255,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#b39eff",GradientType=1);
-=======
-.background-gradient {
-    background: rgb(0,0,0);
-    background: -moz-linear-gradient(135deg, rgba(0,0,0,1) 12%, rgba(163,144,232,0) 56%, rgba(179,158,255,0) 100%);
-    background: -webkit-linear-gradient(135deg, rgba(0,0,0,1) 12%, rgba(163,144,232,0) 56%, rgba(179,158,255,0) 100%);
-    background: linear-gradient(135deg, rgba(0,0,0,1) 12%, rgba(163,144,232,0) 56%, rgba(179,158,255,0) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#b39eff",GradientType=1);
->>>>>>> a27e6147b7756bf5d09404155e6238069c1b67bc
 }
