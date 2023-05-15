@@ -1,26 +1,35 @@
-import { useEffect, useState, useRef } from "react";
-import { getMovies, useMovies } from "../data/api";
-import { useSearch } from "../helpers";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useMovies, useSearch } from "../helpers";
 import Card from "./ui/Card";
+import debounce from "just-debounce-it";
 
 function SearchMovies() {
+  const [sort, setSort] = useState(false);
+  const [error, inputSearch, setInputQuery] = useSearch();
+  const { movies, getMovies, loading } = useMovies(inputSearch, sort);
 
-  const movies = useMovies();
-  const [error, inputQuery, setInputQuery] = useSearch();
-  
+  const debouncedGetMovies = useCallback( debounce(search =>{
+    return getMovies(search);
+  }, 2000), [getMovies]);
+
+  function handleSort (){
+    setSort(!sort);
+  }
 
   function handleInput(e) {
     const newQuery = e.target.value;
-    if (newQuery.startsWith(' ')) return;
+    if (newQuery.startsWith(" ")) return;
     setInputQuery(newQuery);
+
+    debouncedGetMovies(newQuery)
   }
 
-  
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(inputQuery);
-    setInputQuery("");
+    if (error === null) {
+      getMovies(inputSearch);
+      setInputQuery("");
+    }
   }
 
   return (
@@ -29,7 +38,14 @@ function SearchMovies() {
         <form onSubmit={handleSubmit} className="flex">
           <label>Search Movies:</label>
           <div className="flex flex-col">
-            <input value={inputQuery} onChange={handleInput} className="text-sub-titles" name="query" type="text" />
+            <input
+              value={inputSearch}
+              onChange={handleInput}
+              className="text-sub-titles"
+              name="query"
+              type="text"
+            />
+            <input type="checkbox" value={sort} onChange={handleSort}/>
             <button type="submit">Search</button>
           </div>
         </form>
@@ -37,13 +53,15 @@ function SearchMovies() {
       </div>
       <div className="">
         <ul className="px-8 grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 bg-sub-titles">
-        {movies.map((movie) => {
-          return (
-            <li key={movie.id}>
-              <Card title={movie.title} image={movie.image} />
-            </li>
-          );
-        })}
+          {loading
+            ? "Loading ... "
+            : movies?.map((movie) => {
+                return (
+                  <li key={movie.id}>
+                    <Card title={movie.title} image={movie.image} />
+                  </li>
+                );
+              })}
         </ul>
       </div>
     </div>

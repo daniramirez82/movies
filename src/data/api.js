@@ -1,33 +1,24 @@
-import resultMovies from "../data/results.json";
-
-
-export async function getMovies(query) {
-
+export async function searchMovies(search) {
+  let mappedMovies = null;
+  if (search) {
     try {
-        const response = await fetch(`http://www.omdbapi.com/?apikey=ea564e4c&s=${query}`);
-        const results = await response.json();
+      const response = await fetch(
+        `http://www.omdbapi.com/?apikey=ea564e4c&s=${search}`
+      );
+      const results = await response.json();
+      if (results.Response) {
         const { Search: data } = results;
-        return data?.map(r => ({
-            title: r.Title,
-            year: r.Year,
-            id: r.imdbID,
-            type: r.Type,
-            image: r.Poster
+        mappedMovies = data?.map((r) => ({
+          title: r.Title,
+          year: r.Year,
+          id: r.imdbID,
+          type: r.Type,
+          image: r.Poster,
         }));
+      }
     } catch (err) {
-        console.log('Fail feching Data', err);
+      console.log("Fail feching Data", err);
     }
-
-
+  }
+  return mappedMovies;
 }
-
-export function useMovies() {
-    const { Search: data } = resultMovies;
-    return data?.map(r => ({
-        title: r.Title,
-        year: r.Year,
-        id: r.imdbID,
-        type: r.Type,
-        image: r.Poster
-    }));
-};

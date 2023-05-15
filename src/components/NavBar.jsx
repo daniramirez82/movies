@@ -1,12 +1,15 @@
 import ButtonLight from "./ui/ButtonLight";
 import {ReactComponent as LeftArrow} from "../../public/icons/left-arrow.svg"
 import {ReactComponent as Bell} from "../../public/icons/bell.svg"
-
+import { useContext } from "react";
+import { OpenMenuContext } from "../App";
 
 function NavBar() {
+const {showMenu, setShowMenu}= useContext(OpenMenuContext)
+
   return (
     <div className="flex justify-between w-full">
-      <div>
+      <div onClick={()=> setShowMenu((prevState)=> !prevState)} className={`transition-all ease-in-out delay-150 duration-500 ${showMenu ? "rotate-180" : ""}`} >
         <ButtonLight><LeftArrow/></ButtonLight>
       </div>
       <div className="flex justify-around items-center">
