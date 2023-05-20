@@ -9,7 +9,7 @@ const {showMenu, setShowMenu}= useContext(OpenMenuContext)
 
   return (
     <div className="flex justify-between w-full">
-      <div onClick={()=> setShowMenu((prevState)=> !prevState)} className={`transition-all ease-in-out delay-150 duration-500 ${showMenu ? "rotate-180" : ""}`} >
+      <div onClick={()=> setShowMenu((prevState)=> !prevState)} className={`transition-all ease-in-out delay-300 duration-500 ${!showMenu ? "rotate-180" : ""}`} >
         <ButtonLight><LeftArrow/></ButtonLight>
       </div>
       <div className="flex justify-around items-center">
