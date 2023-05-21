@@ -1,3 +1,5 @@
+import { users } from "./users";
+
 export async function searchMovies(search) {
   let mappedMovies = null;
   if (search) {
@@ -6,14 +8,18 @@ export async function searchMovies(search) {
         `http://www.omdbapi.com/?apikey=ea564e4c&s=${search}`
       );
       const results = await response.json();
+      const tempUsers = getUsers();
       if (results.Response) {
         const { Search: data } = results;
-        mappedMovies = data?.map((r) => ({
+        mappedMovies = data?.map((r,i) => ({
+          userName: tempUsers[i].username,  
+          userImage: tempUsers[i].image,
           title: r.Title,
           year: r.Year,
           id: r.imdbID,
           type: r.Type,
           image: r.Poster,
+          type:r.Type[0].toUpperCase()+r.Type.slice(2-1),
         }));
       }
     } catch (err) {
@@ -22,3 +28,16 @@ export async function searchMovies(search) {
   }
   return mappedMovies;
 }
+
+const getUsers = ()=>{
+    const TOTAL_USERS = 10;
+    const tempUsers = [];
+    for (let index = 0; index < TOTAL_USERS; index++) {
+        tempUsers.push(users[randomIntFromInterval(1,30)]) 
+    }
+    return tempUsers;
+}
+
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }

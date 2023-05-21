@@ -11,11 +11,11 @@ function App() {
 
   return (
     <OpenMenuContext.Provider value={{ showMenu, setShowMenu }}>
-      <div className="w-full flex justify-center bg-red-500 text-white ">
-        <div className="container flex  bg-background">
+      <div className="w-full text-white">
+        <div className="min-w-[1024px] max-w-[1600px] flex m-auto bg-background">
           <div
             className={` border-r border-lines ${showMenu ? "w-60" : "w-20"
-              } transition-all ease-in-out delay-300 duration-700 flex flex-col h-screen overflow-hidden`}
+              } min-w[80px] transition-all ease-in-out delay-300 duration-700 flex flex-col h-screen overflow-hidden`}
 
           >
             <LeftMenu />

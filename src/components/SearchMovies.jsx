@@ -3,17 +3,19 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useMovies, useSearch } from "../helpers";
 import Card from "./ui/Card";
 import debounce from "just-debounce-it";
-import { ReactComponent as Search } from "../../public/icons/search.svg"
-
+import { ReactComponent as Search } from "../assets/icons/search.svg";
 
 function SearchMovies() {
   const [sort, setSort] = useState(false);
   const [error, inputSearch, setInputQuery] = useSearch();
   const { movies, getMovies, loading } = useMovies(inputSearch, sort);
 
-  const debouncedGetMovies = useCallback(debounce(search => {
-    return getMovies(search);
-  }, 300), [getMovies]);
+  const debouncedGetMovies = useCallback(
+    debounce((search) => {
+      return getMovies(search);
+    }, 300),
+    [getMovies]
+  );
 
   function handleSort() {
     setSort(!sort);
@@ -24,7 +26,7 @@ function SearchMovies() {
     if (newQuery.startsWith(" ")) return;
     setInputQuery(newQuery);
 
-    debouncedGetMovies(newQuery)
+    debouncedGetMovies(newQuery);
   }
 
   async function handleSubmit(e) {
@@ -36,16 +38,17 @@ function SearchMovies() {
   }
 
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full px-12 ">
       <div className="w-full h-40 flex justify-between items-center ">
-
-        <h3 className=" w-80">Continue Watching</h3>
+        <h3 className=" text-lg font-semibold w-80">Continue Watching</h3>
 
         <form onSubmit={handleSubmit} className="w-full">
-          <div className="flex  justify-between items-center">
+          <div className="flex justify-end items-center">
             <div className="flex flex-col pt-6">
               <div className="relative">
-                <div className="absolute left-4 pt-[2px] translate-y-1/2 "><Search /></div>
+                <div className="absolute left-4 pt-[2px] translate-y-1/2 ">
+                  <Search />
+                </div>
                 <input
                   placeholder="Search a movie"
                   value={inputSearch}
@@ -55,31 +58,33 @@ function SearchMovies() {
                   type="text"
                 />
               </div>
-              <p className={`${error ? "opacity-100" : "opacity-0"} text-main h-6 w-72`}>{error}</p>
+              <p
+                className={`${
+                  error ? "opacity-100" : "opacity-0"
+                } text-main h-6 w-72`}
+              >
+                {error}
+              </p>
             </div>
             <div className="flex">
-            <p className="pr-4">Sort By Name: </p>
-            <input type="checkbox" value={sort} onChange={handleSort} />
-
+              <p className="pr-4">Sort By Name: </p>
+              <input type="checkbox" value={sort} onChange={handleSort} />
             </div>
-            
           </div>
         </form>
-
-
-
       </div>
+      {/* //grid de peliculas */}
       <div className="">
-        <ul className="px-8 grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 bg-sub-titles">
+        <ul className="grid w-full grid-cols-3 xl:grid-cols-4 gap-8 pb-8">
           {loading
             ? "Loading ... "
             : movies?.map((movie) => {
-              return (
-                <li key={movie.id}>
-                  <Card title={movie.title} image={movie.image} />
-                </li>
-              );
-            })}
+                return (
+                  <li  key={movie.id}>
+                    <Card title={movie.title} image={movie.image} type={movie.type} userImage={movie.userImage} userName={movie.userName} />
+                  </li>
+                );
+              })}
         </ul>
       </div>
     </div>

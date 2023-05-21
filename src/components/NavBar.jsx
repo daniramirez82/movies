@@ -1,6 +1,6 @@
 import ButtonLight from "./ui/ButtonLight";
-import {ReactComponent as LeftArrow} from "../../public/icons/left-arrow.svg"
-import {ReactComponent as Bell} from "../../public/icons/bell.svg"
+import {ReactComponent as LeftArrow} from "../assets/icons/left-arrow.svg"
+import {ReactComponent as Bell} from "../assets/icons/bell.svg"
 import { useContext } from "react";
 import { OpenMenuContext } from "../App";
 

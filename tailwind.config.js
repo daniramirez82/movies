@@ -9,8 +9,9 @@ export default {
       "main": "#AC1a19",
       "white": "#FDFDFD",
       "lines": "#212023",
-      "seconday": "#141414",
+      "secondary": "#141414",
       "sub-titles": "#626166",
+      "green":"rgb(21 128 61)"
     },
     extend: {},
   },
