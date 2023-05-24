@@ -25,7 +25,7 @@ function App() {
             <div className="h-32 min-h-[128px] px-8 lg:px-14 bg-background flex items-center">
               <NavBar />
             </div>
-            <div className="min-h-[40vh] bg-main">
+            <div className="min-h-[40vh]">
               <MainMovie />
             </div>
             <div className="w-full h-full">
