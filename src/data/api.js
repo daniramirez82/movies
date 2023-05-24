@@ -6,7 +6,7 @@ export async function searchMovies(search) {
   if (search) {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=ea564e4c&s=${search}`
+        `https://www.omdbapi.com/?apikey=ea564e4c&s=${search}`
       );
       const results = await response.json();
       const tempUsers = getUsers();
