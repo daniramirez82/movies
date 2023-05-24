@@ -1,3 +1,4 @@
+import { randomIntFromInterval } from "../helpers";
 import { users } from "./users";
 
 export async function searchMovies(search) {
@@ -17,7 +18,6 @@ export async function searchMovies(search) {
           title: r.Title,
           year: r.Year,
           id: r.imdbID,
-          type: r.Type,
           image: r.Poster,
           type:r.Type[0].toUpperCase()+r.Type.slice(2-1),
         }));
@@ -38,6 +38,4 @@ const getUsers = ()=>{
     return tempUsers;
 }
 
-function randomIntFromInterval(min, max) { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
+

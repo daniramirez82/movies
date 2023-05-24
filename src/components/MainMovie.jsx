@@ -3,9 +3,13 @@ import ButtonSmall from "./ui/ButtonSmall";
 import { ReactComponent as Wifi } from "../assets/icons/wifi.svg";
 import ButtonBig from "./ui/ButtonBig";
 import { mainMovies } from "../data/main-movies";
+import { randomIntFromInterval } from "../helpers";
+import { useRef } from "react";
 
-function MainMovie({ platform, points, title, language }) {
-  const movie = mainMovies[0];
+function MainMovie() {
+
+
+  const movie = useRef(mainMovies[randomIntFromInterval(1,10)]);
 
   return (
     <div className="relative w-full h-full text-white">
@@ -18,9 +22,9 @@ function MainMovie({ platform, points, title, language }) {
               </ButtonSmall>
             </div>
             <div className="pt-10 text-5xl font-bold pb-3">
-              {movie.platform.toLocaleUpperCase()}
+              {movie.current.platform.toLocaleUpperCase()}
             </div>
-            <div className="pb-3 text-3xl font-medium">{movie.title}</div>
+            <h1 className="pb-3 text-3xl font-medium drop-shadow-xl">{movie.current.title}</h1>
             <div className="flex justify-between w-fit">
               <div className="flex">
                 <img
@@ -28,19 +32,19 @@ function MainMovie({ platform, points, title, language }) {
                   src="/icons/IMDB-logo.svg"
                   alt="IMDB logo"
                 />
-                <span>{movie.points}</span>
+                <span>{movie.current.points}</span>
               </div>
               <div className="flex">
                 <img
                   className="w-7 mr-2 ml-2"
-                  src={`/icons/${movie.language}.svg`}
+                  src={`/icons/${movie.current.language}.svg`}
                   alt=""
                 />
-                <span>{movie.language}</span>
+                <span>{movie.current.language}</span>
               </div>
             </div>
           </div>
-          <div className=" pb-1 xl:pb-8">
+          <div className="pb-6">
             <ButtonBig label="Watch" />
           </div>
         </div>
@@ -49,7 +53,7 @@ function MainMovie({ platform, points, title, language }) {
       <div
         className={`w-full h-full bg-cover  ${styles["background-gradient"]} absolute left-0 top-0`}
         style={{
-          backgroundImage: `url(https://statcdn.fandango.com/MPX/image/NBCU_Fandango/800/207/thumb_596DA830-7245-4748-94B1-270B8AD95360.jpg)`,
+          backgroundImage: `url(${movie.current.bgImage})`,
         }}
       ></div>
       <div
