@@ -52,7 +52,8 @@ function MainMovie() {
       </div>
       <div
        style={{
-        backgroundImage:`url(${movie.current.bgImage})`
+        backgroundImage:`url(${movie.current.bgImage})`,
+        backgroundSize: "cover",
       }}
         className={`w-full h-full bg-cover  ${styles["background-gradient"]} absolute left-0 top-0`}
        
