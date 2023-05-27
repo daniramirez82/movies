@@ -51,10 +51,11 @@ function MainMovie() {
         <div>carrusel</div>
       </div>
       <div
+       style={{
+        backgroundImage:`url(${movie.current.bgImage})`
+      }}
         className={`w-full h-full bg-cover  ${styles["background-gradient"]} absolute left-0 top-0`}
-        style={{
-          backgroundImage: `url(${movie.current.bgImage})`,
-        }}
+       
       ></div>
       <div
         className={`w-full h-full bg-cover absolute top-0 left-0 ${styles["background-gradient"]}`}
