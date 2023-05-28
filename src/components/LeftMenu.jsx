@@ -3,7 +3,7 @@ import Button from "./ui/Button";
 import Icon from "./ui/Icon";
 import { useContext } from "react";
 import { OpenMenuContext } from "../App";
-import FollowerList from "./ui/followersList";
+import FollowerList from "./ui/FollowersList";
 import { users } from "../data/users";
 
 function LeftMenu() {
