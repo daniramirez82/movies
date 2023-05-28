@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useMovies, useSearch } from "../helpers";
 import Card from "./ui/Card";
 import debounce from "just-debounce-it";
